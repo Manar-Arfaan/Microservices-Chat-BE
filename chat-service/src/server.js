@@ -50,7 +50,7 @@ app.use("/api/chat", chatMessageRoutes);
 
 //Connect DB
 mongoose
-  .connect(process.env.DB_URL, {
+  .connect("mongodb://localhost:27017/userdb", {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
