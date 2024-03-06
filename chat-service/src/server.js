@@ -2,10 +2,10 @@ const express = require("express");
 const mongoose = require("mongoose");
 const WebSocket = require("ws");
 const http = require("http");
-const axios=require('axios')
 const jwt=require('jsonwebtoken')
 const bodyParser = require("body-parser");
 const cors = require("cors");
+require('dotenv').config();
 const app = express();
 const chatMessageRoutes = require("./routes/chatMessageRoutes");
 const PORT = process.env.PORT || 4000;
@@ -22,7 +22,7 @@ wss.on("connection",async  (ws,req) => {
 
   // Decode token to get user ID
   let userId;
-  const decoded = jwt.verify(token, process.env.JWT_SECRET);
+  const decoded = jwt.verify(token, mySuperSecretKey123);
   userId = decoded.userId;
 
   //Associate userId with the WebSocket client
@@ -49,7 +49,7 @@ app.use("/api/chat", chatMessageRoutes);
 
 //Connect DB
 mongoose
-  .connect("mongodb://localhost:27017/userdb", {
+  .connect(process.env.DB_URL, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })

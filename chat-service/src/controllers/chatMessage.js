@@ -32,7 +32,6 @@ exports.saveMessage = async (req, res) => {
       //Broadcast message to WebSocket
       req.app.locals.wss.clients.forEach((client)=>{
        // if (client.readyState === WebSocket.OPEN && (client.username === userId || client.username === receiverId)) {
-         console.log("Heello")
           client.send(JSON.stringify(newMessage));
         //}
       })
