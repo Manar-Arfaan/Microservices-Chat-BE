@@ -36,8 +36,8 @@ All endpoints require authentication except for user registration and login. Aut
     "password": "password123"
   }
 - **Response:**
- #### Status Code: 201 Created
-```json
-{
-  "token": "<JWT_TOKEN>"
-}
+   #### Status Code: 201 Created
+    ```json
+    {
+      "token": "<JWT_TOKEN>"
+    }  
