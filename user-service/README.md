@@ -25,7 +25,7 @@ All endpoints require authentication except for user registration and login. Aut
 
 ### 1. User Registration
 
-- **URL:** `/signup`
+- **URL:** `users/signup`
 - **Method:** `POST`
 - **Description:** Allow users to register by providing basic information such as username, email, and password.
 - **Request Body:**
@@ -34,4 +34,10 @@ All endpoints require authentication except for user registration and login. Aut
     "username": "example",
     "email": "example@example.com",
     "password": "password123"
+  }
+- **Response:**
+  ```json
+  {
+    Status Code: 201 Created
+    Body: { "token": "<JWT_TOKEN>" }
   }
