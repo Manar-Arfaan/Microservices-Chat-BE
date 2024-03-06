@@ -13,9 +13,25 @@ To set up and deploy the User Service microservice, follow these steps:
 
 # API Documentation
 ## User Registration
--Endpoint: POST /signup
--Description: Allow users to register by providing basic information such as username, email, and password.
--Request Body:
-        -username (string): The username of the user.
-        -email (string): The email address of the user.
-        -password (string): The password of the user.
+## Base URL
+
+The base URL for all endpoints is `http://localhost:3000/api/users`.
+
+## Authentication
+
+All endpoints require authentication except for user registration and login. Authentication is performed using JSON Web Tokens (JWT). After successful login, the API returns a JWT token which should be included in the `Authorization` header of subsequent requests.
+
+## Endpoints
+
+### 1. User Registration
+
+- **URL:** `/signup`
+- **Method:** `POST`
+- **Description:** Allow users to register by providing basic information such as username, email, and password.
+- **Request Body:**
+  ```json
+  {
+    "username": "example",
+    "email": "example@example.com",
+    "password": "password123"
+  }
