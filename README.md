@@ -1,42 +1,62 @@
-# Microservice for chat backend 
+# Microservices User Management and Chat System
 
-This project contains two microservices: User Service and Chat Service.
+This repository contains a microservices-based user management system with a chat feature. The system allows users to register, login, manage their profiles, and engage in one-to-one text chat conversations in real-time. The application is designed to be scalable, secure, and easy to deploy using Docker containers.
 
-# User Service
+## Core Features
 
-The User Service handles user authentication and user-related operations.
+### User Management
 
-## Features
+1. **Signup**: New users can register with an email and password.
+2. **Login**: Users can log in using their credentials.
+3. **Profile Management**: Logged-in users can view and edit their profile information, such as username and email.
 
-- User authentication (signup, login)
-- Profile management (update profile, change password)
-- JWT-based authentication
-- MongoDB integration for user data storage
+### Chat Feature
 
-## Technologies Used
+1. **Real-time Communication**: Implement a basic one-to-one text chat feature.
+2. **Chat History**: Save and retrieve chat history to ensure continuity across sessions.
 
-- Node.js
-- Express.js
-- MongoDB
-- JWT (JSON Web Tokens)
-- bcrypt (for password hashing)
-- Swagger for API documentation
+## Technical Stack
 
-## Getting Started
+### Backend Technologies
 
-Follow these steps to set up and run the project:
+- **Node.js**: Server-side logic is developed using Node.js.
+- **Express.js**: Utilized as the web application framework for Node.js.
+- **WebSocket**: WebSocket is used for real-time communication in the chat feature.
 
-1. Clone this repository to your local machine:
+### Database
+
+- **MongoDB**: MongoDB is used for storing user data and chat history.
+- **Database Indexing**: Proper database indexing is implemented for efficient data retrieval.
+
+### Containerization (Optional)
+
+- **Docker**: Docker containers are utilized for ease of setup and consistency.
+- **Dockerfile**: Included in each microservice directory with necessary configurations.
+
+## Setup and Deployment
+
+1. **Clone Repository**: Clone this repository to your local machine:
 
    ```bash
    git clone <repository-url>
-2. Navigate to the root directory of the project:
-   cd microservices-project
-4. Build and run each service as a Docker container:
-   cd user-service
-   docker build -t user-service
-   docker run -d -p 3000:3000 user-service
-   cd ../chat-service
-   docker build -t chat-service .
-   docker run -d -p 4000:4000 chat-service
-  
+2. Install Dependencies: Navigate to the project directory and install dependencies for each microservice:
+      cd microservices-project
+      cd user-service
+      npm install
+      cd ../chat-service
+      npm install
+3. Build and Run Docker Containers: Use Docker Compose to build and run containers for the entire application:
+      docker-compose up --build
+4. Access Services: Once the containers are running, you can access the services at the following endpoints:
+      User Service: http://localhost:3000
+      Chat Service: http://localhost:4000
+
+## Testing
+
+1. Unit Tests: Basic unit tests are provided for core functionalities.
+2. Error Handling: The application handles common error scenarios gracefully.
+
+## Documentation
+
+1. API Documentation: Detailed API documentation is provided in each microservice's README file.
+2. Project Overview: A brief overview of the application architecture is included in the project's main README file.
