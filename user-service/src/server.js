@@ -5,7 +5,6 @@ const cors=require('cors');
 const swaggerUi=require('swagger-ui-express');
 const YAML=require('yamljs');
 const swaggerDocument=YAML.load('./swagger.yaml')
-const specs=require('../swaggerConfig'); // Import the swagger config
 const authRoutes=require('./routes/authRoutes'); // Import auth routes 
 const profileRoutes=require('./routes/profileRoutes');
 const logger=require('../config/logger')

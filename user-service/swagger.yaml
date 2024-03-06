@@ -1,0 +1,139 @@
+swagger: '2.0'
+info:
+  title: User Management API
+  version: 1.0.0
+  description: The User Management API provides endpoints for managing user accounts within an application. It allows for user registration, authentication, and profile management. This API enables developers to create robust user management functionalities in their applications with ease. 
+servers:
+  -url: http://localhost:3000/api
+basePath: /api/users
+schemes:
+  - http
+paths:
+  /signup:
+    post:
+      summary: User Registration
+      description: Allow users to register by providing basic information such as username,email, and password.
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: user
+          required: true
+          schema:
+            type: object
+            properties: 
+              username:
+                type: string
+                description: The username of the user.
+              email:    
+                type: string
+                format: email
+                description: The email address of the user.
+              password:
+                type: string
+                description: The password of the user.
+      responses:
+        201:
+          description: User registeration succeful. returns a JWT token.
+        400:
+          description: Invalid request body or missing required fields.
+        409:
+          description: Email address already exists.
+  /signin:
+    post:
+      summary: User Login
+      description: Allow users to register by providing basic information such as username,email, and password.
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: user
+          required: true
+          schema:
+            type: object
+            properties: 
+              username:
+                type: string
+                description: The username of the user.
+              email:    
+                type: string
+                format: email
+                description: The email address of the user.
+              password:
+                type: string
+                description: The password of the user.
+      responses:
+        201:
+          description: User registeration succeful. returns a JWT token.
+        400:
+          description: Invalid request body or missing required fields.
+        409:
+          description: Email address already exists.
+  /profile:
+    get:
+      summary: User Login
+      description: Allow users to register by providing basic information such as username,email, and password.
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: user
+          required: true
+          schema:
+            type: object
+            properties: 
+              username:
+                type: string
+                description: The username of the user.
+              email:    
+                type: string
+                format: email
+                description: The email address of the user.
+              password:
+                type: string
+                description: The password of the user.
+      responses:
+        201:
+          description: User registeration succeful. returns a JWT token.
+        400:
+          description: Invalid request body or missing required fields.
+        409:
+          description: Email address already exists.
+  /update-profile:
+    put:
+      summary: User Login
+      description: Allow users to register by providing basic information such as username,email, and password.
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: user
+          required: true
+          schema:
+            type: object
+            properties: 
+              username:
+                type: string
+                description: The username of the user.
+              email:    
+                type: string
+                format: email
+                description: The email address of the user.
+              password:
+                type: string
+                description: The password of the user.
+      responses:
+        201:
+          description: User registeration succeful. returns a JWT token.
+        400:
+          description: Invalid request body or missing required fields.
+        409:
+          description: Email address already exists.
