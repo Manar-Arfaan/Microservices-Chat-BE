@@ -40,5 +40,5 @@ All endpoints require authentication except for user registration and login. Aut
     "token": "<JWT_TOKEN>" 
   }
 - **Error Response:**
-  -**400 Bad request:**
-  -**409 Conflict:** Email already exists
+  -##**400 Bad request:**
+  -##**409 Conflict:** Email already exists
