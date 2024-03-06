@@ -7,6 +7,9 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 require('dotenv').config();
 const app = express();
+const swaggerUi=require('swagger-ui-express');
+const YAML=require('yamljs');
+const swaggerDocument=YAML.load('./swagger.yaml')
 const chatMessageRoutes = require("./routes/chatMessageRoutes");
 const PORT = process.env.PORT || 4000;
 
@@ -22,7 +25,7 @@ wss.on("connection",async  (ws,req) => {
 
   // Decode token to get user ID
   let userId;
-  const decoded = jwt.verify(token, mySuperSecretKey123);
+  const decoded = jwt.verify(token, 'mySuperSecretKey123');
   userId = decoded.userId;
 
   //Associate userId with the WebSocket client
@@ -44,8 +47,10 @@ app.use(bodyParser.json()); // Use it to parse JSON request bodies
 app.use(cors()); // Enable Cors
 
 //Routes
-
 app.use("/api/chat", chatMessageRoutes);
+
+// serve Swagger UI at /api-docs endpoint 
+app.use('/api-docs',swaggerUi.serve,swaggerUi.setup(swaggerDocument))
 
 //Connect DB
 mongoose
@@ -59,6 +64,14 @@ mongoose
 app.get("/", (req, res) => {
   res.send("Chat Service is up and running");
 });
+
+app.all("*", (req, res) => {
+  const err = new Error(`Requested URL ${req.path} not found!`);
+  res.status(404).json({
+    statuscode: 404,
+    message: err.message,
+  });
+})
 
 server.listen(PORT, () => {
   console.log(`Websocket server is running on http://localhost:${PORT}`);

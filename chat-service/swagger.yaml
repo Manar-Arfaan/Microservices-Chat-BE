@@ -1,123 +1,80 @@
-swagger: '2.0'
+swagger: "2.0"
 info:
-  title: User Management API
-  version: 1.0.0
-  description: The User Management API provides endpoints for managing user accounts within an application. It allows for user registration, authentication, and profile management. This API enables developers to create robust user management functionalities in their applications with ease. 
-servers:
-  -url: http://localhost:3000/api
-basePath: /api/users
+  version: "1.0.0"
+  title: "Chat Service API"
+  description: "API documentation for the chat service"
+basePath: "/api"
 schemes:
-  - http
+  - "http"
+consumes:
+  - "application/json"
+produces:
+  - "application/json"
 paths:
-  /signup:
+  /sendMessage:
     post:
-      summary: User Registration
-      description: Allow users to register by providing basic information such as username,email, and password.
-      consumes:
-        - application/json
-      produces:
-        - application/json
+      summary: "Send a message"
+      description: "Send a message to another user"
       parameters:
         - in: body
-          name: user
+          name: message
+          description: "Message content"
           required: true
           schema:
             type: object
-            properties: 
-              username:
+            properties:
+              receiverId:
                 type: string
-                description: The username of the user.
-              email:    
+                description: "ID of the recipient user"
+              messageContent:
                 type: string
-                format: email
-                description: The email address of the user.
-              password:
-                type: string
-                description: The password of the user.
-      responses:
-        201:
-          description: User registeration succeful. returns a JWT token.
-        400:
-          description: Invalid request body or missing required fields.
-        409:
-          description: Email address already exists.
-  /signin:
-    post:
-      summary: User Login
-      description: Authenticate a user and generate a JWT token.
-      consumes:
-        - application/json
-      produces:
-        - application/json
-      parameters:
-        - in: body
-          name: credentails
-          required: true
-          schema:
-            type: object
-            properties: 
-              email:    
-                type: string
-                format: email
-                description: The email address of the user.
-              password:
-                type: string
-                description: The password of the user.
+                description: "Content of the message"
       responses:
         200:
-          description: Successful login.
-        400:
-          description: Invalid request parameters.
+          description: "Message sent successfully"
         401:
-          description: Unauthorized - Invalid credentials.
+          description: "User session verification failed"
         500:
-          description: Internal server error
-  /profile:
+          description: "Internal server error"
+  /getChatHistory:
     get:
-      summary: Get User Profile
-      description: Retrieve the profile information of the authenticated user.
-      security:
-        - bearerAuth: []
-      consumes:
-        - application/json
-      produces:
-        - application/json
+      summary: "Get chat history"
+      description: "Retrieve chat history for the authenticated user"
       responses:
-        201:
-          description: User registeration succeful. returns a JWT token.
-        400:
-          description: Invalid request body or missing required fields.
-        409:
-          description: Email address already exists.
-  /update-profile:
-    put:
-      summary: User Login
-      description: Allow users to register by providing basic information such as username,email, and password.
-      consumes:
-        - application/json
-      produces:
-        - application/json
-      parameters:
-        - in: body
-          name: user
-          required: true
+        200:
+          description: "Chat history retrieved successfully"
           schema:
-            type: object
-            properties: 
-              username:
-                type: string
-                description: The username of the user.
-              email:    
-                type: string
-                format: email
-                description: The email address of the user.
-              password:
-                type: string
-                description: The password of the user.
-      responses:
-        201:
-          description: User registeration succeful. returns a JWT token.
-        400:
-          description: Invalid request body or missing required fields.
-        409:
-          description: Email address already exists.
+            type: array
+            items:
+              $ref: "#/definitions/ChatMessage"
+        401:
+          description: "User session verification failed"
+        500:
+          description: "Internal server error"
+definitions:
+  ChatMessage:
+    type: object
+    properties:
+      messageId:
+        type: string
+        description: "ID of the message"
+      sender:
+        type: string
+        description: "ID of the sender"
+      receiver:
+        type: string
+        description: "ID of the receiver"
+      message:
+        type: string
+        description: "Content of the message"
+      timestamp:
+        type: object
+        properties:
+          date:
+            type: string
+            format: date
+            description: "Date of the message"
+          time:
+            type: string
+            format: time
+            description: "Time of the message"
