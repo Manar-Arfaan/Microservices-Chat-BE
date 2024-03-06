@@ -32,7 +32,7 @@ mongoose
     process.exit(1);
   });
 
-  app.use(morgan('combined'));
+  //app.use(morgan('combined'));
 
 //Routes
 app.use('/api/users',authRoutes)
