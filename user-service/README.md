@@ -36,11 +36,12 @@ All endpoints require authentication except for user registration and login. Aut
     "password": "password123"
   }
 - **Response:**
-   -**Status Code: 201 Created:**
+   **Status Code: 201 Created:**
     ```json
     {
       "token": "<JWT_TOKEN>"
     }
-  -**Error Response:**
+    
+  **Error Response:**
     -400 Bad Request: Invalid request body or missing required fields.
     -401 Unauthorized: Missing or invalid JWT token.
