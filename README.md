@@ -1,19 +1,19 @@
-## Microservice for chat backend 
+# Microservice for chat backend 
 
 This project contains two microservices: User Service and Chat Service.
 
-## User Service
+# User Service
 
 The User Service handles user authentication and user-related operations.
 
-### Features
+## Features
 
 - User authentication (signup, login)
 - Profile management (update profile, change password)
 - JWT-based authentication
 - MongoDB integration for user data storage
 
-### Technologies Used
+## Technologies Used
 
 - Node.js
 - Express.js
