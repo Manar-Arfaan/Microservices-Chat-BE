@@ -7,6 +7,6 @@ const extractUserId=require('../middlewares/extractUserId');
 router.get('/chat-history',extractUserId,chatMessageController.getChatHistory);
 
 //Route to send a message
-router.post('/send-message',extractUserId,chatMessageController.saveMessage);
+router.post('/send-message',extractUserId,chatMessageController.sendMessage);
 
 module.exports=router;

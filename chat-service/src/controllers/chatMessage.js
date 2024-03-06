@@ -1,24 +1,36 @@
 const WebSocket=require('ws');
 const axios = require("axios");
 const chatMessage = require("../models/chatModel");
+const mongoose = require('mongoose');
 
-//Handle and save the messages in the db
-exports.saveMessage = async (req, res) => {
+
+//Verify user's session
+const verifySession = async (req) => {
   try {
-    //Verify user session by making a Get request to the user service
+    const authorizationHeader = req.headers.authorization;
     const verifySessionResponse = await axios.get(
       "http://localhost:3000/api/users/verify-session",
       {
         headers: {
-          Authorization: req.headers.authorization,
+          Authorization: authorizationHeader,
         },
       }
-      
     );
+    return verifySessionResponse // Return the response data
+  } catch (error) {
+    throw new Error('Invalid session token'); 
+  }
+};
+//Handle and save the messages in the db
+exports.sendMessage = async (req, res) => {
+  try {
+    //Verify user session by making a Get request to the user service
+    const sessionData = await verifySession(req);
+    console.log('Session data:', sessionData);
   
-    if (verifySessionResponse.status === 200) {
+    if (sessionData.status === 200) {
       //Extract userId from the middleware
-      const userId = verifySessionResponse?.data?.userId;
+      const userId = sessionData?.data?.userId;
       //console.log("OK",userId)
       const { receiverId, messageContent } = req.body;
       
@@ -48,26 +60,35 @@ exports.saveMessage = async (req, res) => {
 //Get the chat history
 exports.getChatHistory = async (req, res) => {
   try {
-    const userId = req.userId;
-
-    const chatHistory = await chatMessage.find({
-      $or: [{ sender: userId }, { receiver: userId }],
-    });
-
-    //Format the chat history data
-    const formattedChatHistory = chatHistory.map((message) => {
-      return {
-        messageId: message._id,
-        sender: message.sender,
-        receiver: message.receiver,
-        message: message.message,
-        timestamp: {
-          date: new Date(message.timestamps).toLocaleDateString(),
-          time: new Date(message.timestamps).toLocaleTimeString(),
-        },
-      };
-    });
-    res.status(200).json(formattedChatHistory);
+    const sessionData = await verifySession(req);
+    console.log('Session data:', sessionData);
+  
+    if (sessionData) {
+      const userId = sessionData?.data?.userId
+      const userIdObjectId=mongoose.Types.ObjectId.createFromHexString(userId) 
+      const chatHistory = await chatMessage.find({
+        $or: [{ sender: userIdObjectId }, { receiver: userIdObjectId }],
+      });
+  
+      //Format the chat history data
+      const formattedChatHistory = chatHistory.map((message) => {
+        return {
+          messageId: message._id,
+          sender: message.sender,
+          receiver: message.receiver,
+          message: message.message,
+          timestamp: {
+            date: new Date(message.timestamps).toLocaleDateString(),
+            time: new Date(message.timestamps).toLocaleTimeString(),
+          },
+        };
+      });
+      res.status(200).json(formattedChatHistory);
+    }
+    else{
+      res.status(401).json({ error: "User session verification failed" });
+    }
+   
   } catch (error) {
     console.error("Error retrieving chat history:", error);
     res.status(500).json({ error: "Internal server error" });
