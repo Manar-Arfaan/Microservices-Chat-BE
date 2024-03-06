@@ -44,21 +44,18 @@ paths:
   /signin:
     post:
       summary: User Login
-      description: Allow users to register by providing basic information such as username,email, and password.
+      description: Authenticate a user and generate a JWT token.
       consumes:
         - application/json
       produces:
         - application/json
       parameters:
         - in: body
-          name: user
+          name: credentails
           required: true
           schema:
             type: object
             properties: 
-              username:
-                type: string
-                description: The username of the user.
               email:    
                 type: string
                 format: email
@@ -67,37 +64,24 @@ paths:
                 type: string
                 description: The password of the user.
       responses:
-        201:
-          description: User registeration succeful. returns a JWT token.
+        200:
+          description: Successful login.
         400:
-          description: Invalid request body or missing required fields.
-        409:
-          description: Email address already exists.
+          description: Invalid request parameters.
+        401:
+          description: Unauthorized - Invalid credentials.
+        500:
+          description: Internal server error
   /profile:
     get:
-      summary: User Login
-      description: Allow users to register by providing basic information such as username,email, and password.
+      summary: Get User Profile
+      description: Retrieve the profile information of the authenticated user.
+      security:
+        - bearerAuth: []
       consumes:
         - application/json
       produces:
         - application/json
-      parameters:
-        - in: body
-          name: user
-          required: true
-          schema:
-            type: object
-            properties: 
-              username:
-                type: string
-                description: The username of the user.
-              email:    
-                type: string
-                format: email
-                description: The email address of the user.
-              password:
-                type: string
-                description: The password of the user.
       responses:
         201:
           description: User registeration succeful. returns a JWT token.

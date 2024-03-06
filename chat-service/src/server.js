@@ -8,7 +8,6 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 const app = express();
 const chatMessageRoutes = require("./routes/chatMessageRoutes");
-const extractUserId=require('./middlewares/extractUserId')
 const PORT = process.env.PORT || 4000;
 
 // Initailize WebSocket server

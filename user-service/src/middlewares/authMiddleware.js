@@ -9,7 +9,7 @@ exports.authenticateUser = (req,res,next)=>{
     }
     const token=authorizationHeader.split(' ')[1];
     try{
-      const decoded=jwt.verify(token,'wswweuwyewyei');
+      const decoded=jwt.verify(token,process.env.JWT_SECRET);
       req.user=decoded;
       next();
   

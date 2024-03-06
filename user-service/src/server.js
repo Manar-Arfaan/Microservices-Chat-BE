@@ -1,7 +1,9 @@
 const express =require('express');
 const bodyParser= require ('body-parser');
 const mongoose=require ('mongoose');
+const morgan=require('morgan')
 const cors=require('cors');
+require('dotenv').config();
 const swaggerUi=require('swagger-ui-express');
 const YAML=require('yamljs');
 const swaggerDocument=YAML.load('./swagger.yaml')
@@ -20,7 +22,7 @@ app.use(cors()); // Enable Cors
 
 //Connect DB 
 mongoose
-  .connect('mongodb://localhost:27017/userdb', {
+  .connect(process.env.DB_URL, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
@@ -29,6 +31,8 @@ mongoose
     logger.error('Failed to connect to DB',err);
     process.exit(1);
   });
+
+  app.use(morgan('combined'));
 
 //Routes
 app.use('/api/users',authRoutes)
