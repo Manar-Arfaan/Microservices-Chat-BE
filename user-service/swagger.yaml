@@ -2,9 +2,9 @@ swagger: '2.0'
 info:
   title: User Management API
   version: 1.0.0
-  description: The User Management API provides endpoints for managing user accounts within an application. It allows for user registration, authentication, and profile management. This API enables developers to create robust user management functionalities in their applications with ease. 
+  description: The User Management API provides endpoints for managing user accounts within an application. It allows for user registration, authentication, and profile management. This API enables developers to create robust user management functionalities in their applications with ease.
 servers:
-  -url: http://localhost:3000/api
+  - url: http://localhost:3000/api
 basePath: /api/users
 schemes:
   - http
@@ -23,11 +23,11 @@ paths:
           required: true
           schema:
             type: object
-            properties: 
+            properties:
               username:
                 type: string
                 description: The username of the user.
-              email:    
+              email:
                 type: string
                 format: email
                 description: The email address of the user.
@@ -36,7 +36,7 @@ paths:
                 description: The password of the user.
       responses:
         201:
-          description: User registeration succeful. returns a JWT token.
+          description: User registration successful. Returns a JWT token.
         400:
           description: Invalid request body or missing required fields.
         409:
@@ -44,7 +44,7 @@ paths:
   /signin:
     post:
       summary: User Login
-      description: Allow users to register by providing basic information such as username,email, and password.
+      description: Allow users to log in using their credentials.
       consumes:
         - application/json
       produces:
@@ -55,11 +55,8 @@ paths:
           required: true
           schema:
             type: object
-            properties: 
-              username:
-                type: string
-                description: The username of the user.
-              email:    
+            properties:
+              email:
                 type: string
                 format: email
                 description: The email address of the user.
@@ -67,73 +64,79 @@ paths:
                 type: string
                 description: The password of the user.
       responses:
-        201:
-          description: User registeration succeful. returns a JWT token.
+        200:
+          description: User login successful. Returns a JWT token.
         400:
           description: Invalid request body or missing required fields.
-        409:
-          description: Email address already exists.
+        401:
+          description: Unauthorized - Invalid credentials.
   /profile:
     get:
-      summary: User Login
-      description: Allow users to register by providing basic information such as username,email, and password.
+      summary: Get User Profile
+      description: Retrieve user profile information.
       consumes:
         - application/json
       produces:
         - application/json
       parameters:
-        - in: body
-          name: user
+        - in: header
+          name: Authorization
+          description: Bearer token
           required: true
+          type: string
+      responses:
+        200:
+          description: User profile retrieved successfully.
           schema:
             type: object
-            properties: 
+            properties:
               username:
                 type: string
                 description: The username of the user.
-              email:    
+              email:
                 type: string
                 format: email
                 description: The email address of the user.
-              password:
-                type: string
-                description: The password of the user.
-      responses:
-        201:
-          description: User registeration succeful. returns a JWT token.
-        400:
-          description: Invalid request body or missing required fields.
-        409:
-          description: Email address already exists.
+        401:
+          description: Unauthorized - Missing or invalid token.
+        404:
+          description: User profile not found.
   /update-profile:
     put:
-      summary: User Login
-      description: Allow users to register by providing basic information such as username,email, and password.
+      summary: Update User Profile
+      description: Update user profile information.
       consumes:
         - application/json
       produces:
         - application/json
       parameters:
+        - in: header
+          name: Authorization
+          description: Bearer token
+          required: true
+          type: string
         - in: body
           name: user
           required: true
           schema:
             type: object
-            properties: 
+            properties:
               username:
                 type: string
-                description: The username of the user.
-              email:    
+                description: The new username of the user.
+              email:
                 type: string
                 format: email
-                description: The email address of the user.
+                description: The new email address of the user.
               password:
                 type: string
-                description: The password of the user.
+                description: The new password of the user.
       responses:
-        201:
-          description: User registeration succeful. returns a JWT token.
+        200:
+          description: User profile updated successfully.
         400:
           description: Invalid request body or missing required fields.
-        409:
-          description: Email address already exists.
+        401:
+          description: Unauthorized - Missing or invalid token.
+        404:
+          description: User profile not found.
