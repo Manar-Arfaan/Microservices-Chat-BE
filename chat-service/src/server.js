@@ -23,7 +23,7 @@ wss.on("connection",async  (ws,req) => {
 
   // Decode token to get user ID
   let userId;
-  const decoded = jwt.verify(token, "mySuperSecretKey123");
+  const decoded = jwt.verify(token, process.env.JWT_SECRET);
   userId = decoded.userId;
 
   //Associate userId with the WebSocket client
@@ -50,7 +50,7 @@ app.use("/api/chat", chatMessageRoutes);
 
 //Connect DB
 mongoose
-  .connect("mongodb://localhost:27017/userdb", {
+  .connect(process.env.DB_URL, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
