@@ -23,7 +23,7 @@ All endpoints require authentication except for user registration and login. Aut
 
 ### 1. User Registration
 
-- **URL:** `/signup`
+- **URL:** `api/users/signup`
 - **Method:** `POST`
 - **Description:** Allow users to register by providing basic information such as username, email, and password.
 - **Request Body:**
@@ -38,6 +38,59 @@ All endpoints require authentication except for user registration and login. Aut
   ```json
   {
     "token": "<JWT_TOKEN>" 
+  }
+- **Error Response:**
+  -##**400 Bad request:**
+  -##**409 Conflict:** Email already exists
+
+### 2. User login
+
+- **URL:** `api/users/signin`
+- **Method:** `POST`
+- **Description:** Allow users to log in by their credentials by providing email, and password.
+- **Request Body:**
+  ```json
+  {
+    "email": "example@example.com",
+    "password": "password123"
+  }
+- **Response:**
+  Status Code: 201 Created
+  ```json
+  {
+    "token": "<JWT_TOKEN>" 
+  }
+- **Error Response:**
+  -##**400 Bad request:**
+  -##**409 Conflict:** Email already exists
+
+### 3. Profile Management
+
+- **URL:** `api/users/profile`
+- **Method:** `GET`
+- **Description:** Allow users to view their profile info.
+- **Response:**
+  Status Code: 201 Created
+  ```json
+  {
+    "username": "example",
+    "email": "example@example.com",
+  }
+- **Error Response:**
+  -##**400 Bad request:**
+  -##**409 Conflict:** Email already exists
+
+### 4. Update Profile
+
+- **URL:** `api/users/update-profile`
+- **Method:** `PUT`
+- **Description:** Allow users to update their profile info.
+- **Response:**
+  Status Code: 200 Created
+  ```json
+  {
+    "username": "example",
+    "email": "example@example.com",
   }
 - **Error Response:**
   -##**400 Bad request:**
