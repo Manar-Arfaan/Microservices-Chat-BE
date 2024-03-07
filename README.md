@@ -65,10 +65,19 @@ To build and run each microservice individually using Docker, follow these steps
 
 ## Testing
 
-1. Unit Tests: Basic unit tests are provided for core functionalities.
-2. Error Handling: The application handles common error scenarios gracefully.
+Basic unit tests are provided for core functionalities within each microservice.
 
-## Documentation
+### Testing with npm test
 
-1. API Documentation: Detailed API documentation is provided in each microservice's README file.
-2. Project Overview: A brief overview of the application architecture is included in the project's main README file.
+To run the unit tests for each service, navigate to the respective service directory like user-service/src and execute the following command:
+
+```bash
+npm test
+
+### Documentation
+
+1. **API Documentation**: Detailed API documentation is available in each microservice's README file. This documentation provides comprehensive information about the endpoints, request parameters, response formats, and authentication requirements for interacting with the microservice.
+
+2. **Project Overview**: A brief overview of the application architecture is provided in the project's main README file. It outlines the high-level structure of the application, including the role of each microservice and how they interact with each other to deliver the overall functionality.
+
+3. **Swagger Documentation**: Swagger is implemented to provide interactive API documentation for each microservice. You can explore and test the APIs using Swagger UI by navigating to the `/api-docs` endpoint of each service in your web browser.
