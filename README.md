@@ -69,10 +69,7 @@ Basic unit tests are provided for core functionalities within each microservice.
 
 ### Testing with npm test
 
-To run the unit tests for each service, navigate to the respective service directory like user-service/src and execute the following command:
-
-```bash
-npm test
+To run the unit tests for each service, navigate to the respective service directory like user-service/src and execute the following command: npm test
 
 ### Documentation
 
