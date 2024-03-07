@@ -7,6 +7,9 @@ require('dotenv').config();
 const swaggerUi=require('swagger-ui-express');
 const YAML=require('yamljs');
 const swaggerDocument=YAML.load('./swagger.yaml')
+const session = require('express-session');
+const MongoStore = require('connect-mongo')
+const mongooseConnection = mongoose.connection;
 const authRoutes=require('./routes/authRoutes'); // Import auth routes 
 const profileRoutes=require('./routes/profileRoutes');
 const logger=require('../config/logger')
@@ -19,6 +22,18 @@ const PORT=process.env.PORT || 3000;
 //MiddleWare
 app.use(bodyParser.json()) 
 app.use(cors()); // Enable Cors
+
+app.use(session({
+  secret: process.env.SESSION_SECRET,
+  resave: false,
+  saveUninitialized: false,
+  mongooseConnection: mongooseConnection,
+  cookie: {
+    maxAge: 72 * 60 * 60 * 1000, 
+    secure: false, // set to true in production if using HTTPS
+    httpOnly: true,
+  },
+}));
 
 //Connect DB 
 mongoose

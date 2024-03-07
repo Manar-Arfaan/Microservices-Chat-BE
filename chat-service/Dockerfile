@@ -2,7 +2,7 @@
 FROM node:20
 
 # Set the working directory in the container 
-WORKDIR /chat-service/src/server
+WORKDIR /chat-service/src
 
 # copy the package.json
 COPY package*.json ./

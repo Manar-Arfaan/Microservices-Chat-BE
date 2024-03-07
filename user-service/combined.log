@@ -132,3 +132,24 @@
 {"level":"info","message":"DB is connented","timestamp":"2024-03-06T13:47:18.878Z"}
 {"level":"error","message":"Requested URL /favicon.ico not found!","timestamp":"2024-03-06T13:51:26.092Z"}
 {"level":"error","message":"Requested URL /api/chat/chat-history not found!","timestamp":"2024-03-06T21:55:05.473Z"}
+{"level":"info","message":"User Service listening at http://localhost:3000","timestamp":"2024-03-06T21:58:19.916Z"}
+{"level":"info","message":"DB is connented","timestamp":"2024-03-06T21:58:19.968Z"}
+{"level":"info","message":"User Service listening at http://localhost:3000","timestamp":"2024-03-07T04:38:26.551Z"}
+{"level":"info","message":"DB is connented","timestamp":"2024-03-07T04:38:26.582Z"}
+{"level":"info","message":"User Service listening at http://localhost:3000","timestamp":"2024-03-07T04:38:39.596Z"}
+{"level":"info","message":"DB is connented","timestamp":"2024-03-07T04:38:39.646Z"}
+{"level":"error","message":"Requested URL /api/users/signin not found!","timestamp":"2024-03-07T04:38:39.886Z"}
+{"level":"info","message":"User Service listening at http://localhost:3000","timestamp":"2024-03-07T04:39:18.670Z"}
+{"level":"info","message":"DB is connented","timestamp":"2024-03-07T04:39:18.695Z"}
+{"level":"info","message":"User Service listening at http://localhost:3000","timestamp":"2024-03-07T04:45:04.688Z"}
+{"level":"info","message":"DB is connented","timestamp":"2024-03-07T04:45:04.708Z"}
+{"level":"info","message":"User Service listening at http://localhost:3000","timestamp":"2024-03-07T05:02:59.662Z"}
+{"level":"info","message":"DB is connented","timestamp":"2024-03-07T05:02:59.683Z"}
+{"level":"info","message":"User Service listening at http://localhost:3000","timestamp":"2024-03-07T05:03:39.453Z"}
+{"level":"info","message":"DB is connented","timestamp":"2024-03-07T05:03:39.471Z"}
+{"level":"info","message":"User Service listening at http://localhost:3000","timestamp":"2024-03-07T05:04:00.711Z"}
+{"level":"info","message":"DB is connented","timestamp":"2024-03-07T05:04:00.731Z"}
+{"level":"info","message":"User Service listening at http://localhost:3000","timestamp":"2024-03-07T06:18:37.505Z"}
+{"level":"info","message":"DB is connented","timestamp":"2024-03-07T06:18:37.526Z"}
+{"level":"info","message":"User Service listening at http://localhost:3000","timestamp":"2024-03-07T06:20:49.142Z"}
+{"level":"info","message":"DB is connented","timestamp":"2024-03-07T06:20:49.159Z"}

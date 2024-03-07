@@ -15,6 +15,7 @@ exports.signup = async (req, res) => {
     await newUser.save();
     //Generate JWT
     const token = jwt.sign({ userId: newUser._id }, process.env.JWT_SECRET);
+    req.session.userId = newUser._id;
     res.status(201).json({ token });
   } catch (error) {
     logger.error("Error in user signup:", error);
@@ -23,7 +24,7 @@ exports.signup = async (req, res) => {
 };
 
 //User Login
-exports.signin= async (req, res) => {
+exports.signin = async (req, res) => {
   try {
     const { email, password } = req.body;
 
@@ -38,9 +39,10 @@ exports.signin= async (req, res) => {
       res.status(401).json({ error: "Invalid credentials" });
     }
     //Generate token
-    const token = jwt.sign({ userId: user._id },process.env.JWT_SECRET, {
-        expiresIn: "3d",
-      });
+    const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, {
+      expiresIn: "3d",
+    });
+    req.session.userId = user._id;
     //Send JWT token in response
     res.status(200).json({ token });
   } catch (error) {
@@ -48,4 +50,3 @@ exports.signin= async (req, res) => {
     res.status(500).json({ error: "Internal Server Error" });
   }
 };
-
