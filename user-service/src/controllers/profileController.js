@@ -6,7 +6,7 @@ const logger = require("../../config/logger");
 exports.getProfile = async (req, res) => {
   try {
     // Get user info from the database by Id
-    const user = await User.findById(req.user.userId);
+    const user = await User.findById(req.user.userId).select('-_id -password');
     //If user doesn't exist, return error
     if (!user) {
       res.status(404).json({ error: "User not found" });

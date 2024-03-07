@@ -47,7 +47,7 @@ exports.sendMessage = async (req, res) => {
           client.send(JSON.stringify(newMessage));
         //}
       })
-      res.status(200).send('Message sent successfully');
+      res.status(200).send({message:'Message sent successfully'});
     } else {
       res.status(401).json({ error: "User session verification failed" });
     }

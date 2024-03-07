@@ -38,7 +38,7 @@ exports.signin= async (req, res) => {
       res.status(401).json({ error: "Invalid credentials" });
     }
     //Generate token
-    const token = jwt.sign({ userId: user._id },"wswweuwyewyei", {
+    const token = jwt.sign({ userId: user._id },process.env.JWT_SECRET, {
         expiresIn: "3d",
       });
     //Send JWT token in response
