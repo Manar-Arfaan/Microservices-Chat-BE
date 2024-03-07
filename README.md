@@ -28,10 +28,22 @@ This repository contains a microservices-based user management system with a cha
 - **MongoDB**: MongoDB is used for storing user data and chat history.
 - **Database Indexing**: Proper database indexing is implemented for efficient data retrieval.
 
-### Containerization (Optional)
+### Containerization 
 
-- **Docker**: Docker containers are utilized for ease of setup and consistency.
-- **Dockerfile**: Included in each microservice directory with necessary configurations.
+- **Docker**: Docker containers are employed to facilitate easy setup and ensure consistency across different environments.
+- **Dockerfile**: Each microservice directory contains a Dockerfile with the necessary configurations to build the respective Docker image.
+
+### Docker Setup
+
+To build and run each microservice individually using Docker, follow these steps:
+
+1. Navigate to the directory of the microservice you wish to run.
+2. Build the Docker image using the provided Dockerfile:
+   ```bash
+   docker build -t <image_name>.
+3. To run the entire project using Docker Compose, execute the following command:
+   ```bash
+   docker-compose up
 
 ## Setup and Deployment
 
@@ -53,10 +65,16 @@ This repository contains a microservices-based user management system with a cha
 
 ## Testing
 
-1. Unit Tests: Basic unit tests are provided for core functionalities.
-2. Error Handling: The application handles common error scenarios gracefully.
+Basic unit tests are provided for core functionalities within each microservice.
 
-## Documentation
+### Testing with npm test
 
-1. API Documentation: Detailed API documentation is provided in each microservice's README file.
-2. Project Overview: A brief overview of the application architecture is included in the project's main README file.
+To run the unit tests for each service, navigate to the respective service directory like user-service/src and execute the following command: npm test
+
+### Documentation
+
+1. **API Documentation**: Detailed API documentation is available in each microservice's README file. This documentation provides comprehensive information about the endpoints, request parameters, response formats, and authentication requirements for interacting with the microservice.
+
+2. **Project Overview**: A brief overview of the application architecture is provided in the project's main README file. It outlines the high-level structure of the application, including the role of each microservice and how they interact with each other to deliver the overall functionality.
+
+3. **Swagger Documentation**: Swagger is implemented to provide interactive API documentation for each microservice. You can explore and test the APIs using Swagger UI by navigating to the `/api-docs` endpoint of each service in your web browser.
