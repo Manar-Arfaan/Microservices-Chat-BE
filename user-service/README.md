@@ -77,6 +77,7 @@ All endpoints require authentication except for user registration and login. Aut
 - **URL:** `api/users/profile`
 - **Method:** `GET`
 - **Description:** Allow users to view their profile info.
+- **Authorization:** Bearer token.
 - **Response:**
   -**200 Created:**
   ```json
@@ -94,6 +95,7 @@ All endpoints require authentication except for user registration and login. Aut
 - **URL:** `api/users/update-profile`
 - **Method:** `PUT`
 - **Description:** Allow users to update their profile info.
+- **Authorization:** Bearer token.
 - **Response:**
   Status Code: 200 Created
   ```json
