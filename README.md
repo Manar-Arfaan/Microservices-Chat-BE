@@ -28,10 +28,22 @@ This repository contains a microservices-based user management system with a cha
 - **MongoDB**: MongoDB is used for storing user data and chat history.
 - **Database Indexing**: Proper database indexing is implemented for efficient data retrieval.
 
-### Containerization (Optional)
+### Containerization 
 
-- **Docker**: Docker containers are utilized for ease of setup and consistency.
-- **Dockerfile**: Included in each microservice directory with necessary configurations.
+- **Docker**: Docker containers are employed to facilitate easy setup and ensure consistency across different environments.
+- **Dockerfile**: Each microservice directory contains a Dockerfile with the necessary configurations to build the respective Docker image.
+
+### Docker Setup
+
+To build and run each microservice individually using Docker, follow these steps:
+
+1. Navigate to the directory of the microservice you wish to run.
+2. Build the Docker image using the provided Dockerfile:
+   ```bash
+   docker build -t <image_name>.
+3. To run the entire project using Docker Compose, execute the following command:
+   ```bash
+   docker-compose up
 
 ## Setup and Deployment
 
