@@ -46,8 +46,9 @@ All endpoints require authentication except for user registration and login. Aut
     "token": "<JWT_TOKEN>" 
   }
 - **Error Response:**
-  -##**400 Bad request:**
-  -##**409 Conflict:** Email already exists
+  -**400:** Bad request <br>
+  -**500:** Internal server error <br>
+  -**409 Conflict:** Email already exists
 
 ### 2. User login
 
@@ -61,14 +62,15 @@ All endpoints require authentication except for user registration and login. Aut
     "password": "password123"
   }
 - **Response:**
-  Status Code: 201 Created
+  Status Code: 200 Created
   ```json
   {
     "token": "<JWT_TOKEN>" 
   }
 - **Error Response:**
-  -##**400 Bad request:**
-  -##**409 Conflict:** Email already exists
+  -**400:** Invalid request body or missing required fields. <br>
+  -**500:** Internal server error. <br>
+  -**401:** Unauthorized - Invalid credentials.
 
 ### 3. Profile Management
 
@@ -76,15 +78,16 @@ All endpoints require authentication except for user registration and login. Aut
 - **Method:** `GET`
 - **Description:** Allow users to view their profile info.
 - **Response:**
-  Status Code: 201 Created
+  -**200 Created:**
   ```json
   {
     "username": "example",
     "email": "example@example.com",
   }
 - **Error Response:**
-  -##**400 Bad request:**
-  -##**409 Conflict:** Email already exists
+  -**500:** Internal server error.<br>
+  -**401:** Unauthorized - Missing or invalid token.<br>
+  -**404:** User profile not found.
 
 ### 4. Update Profile
 
@@ -99,5 +102,6 @@ All endpoints require authentication except for user registration and login. Aut
     "email": "example@example.com",
   }
 - **Error Response:**
-  -##**400 Bad request:**
-  -##**409 Conflict:** Email already exists
+  -**500:** Internal server error.<br> 
+  -**400:** Bad request.
+  -**401:** Unauthorized - Missing or invalid token.
