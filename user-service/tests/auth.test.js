@@ -106,3 +106,71 @@ describe("User signin", () => {
     }
   });
 });
+
+describe("Profile Management", () => {
+  describe("Get Profile", () => {
+    it("should retrieve user profile", async () => {
+      try {
+        const res = await request(server)
+          .get("/api/users/profile")
+          .set("Authorization", "Bearer <token>");
+
+        expect(res.status).toBe(200);
+        expect(res.body).toHaveProperty("_id");
+        expect(res.body).toHaveProperty("username");
+        expect(res.body).toHaveProperty("email");
+      } catch (error) {
+        console.error("Error retrieving user profile:", error);
+      }
+    });
+
+    it("should return an error if user does not exist", async () => {
+      try {
+        const res = await request(server)
+          .get("/api/users/profile")
+          .set("Authorization", "Bearer <invalid_token>");
+
+        expect(res.status).toBe(404);
+        expect(res.body.error).toBe("User not found");
+      } catch (error) {
+        console.error("Error handling non-existent user:", error);
+      }
+    });
+  });
+
+  describe("Edit Profile", () => {
+    it("should update user profile", async () => {
+      try {
+        const res = await request(server)
+          .put("/api/users/update-profile")
+          .set("Authorization", "Bearer <token>")
+          .send({
+            username: "newusername",
+            email: "newemail@example.com",
+          });
+
+        expect(res.status).toBe(200);
+        expect(res.body.message).toBe("Profile updated successfully");
+      } catch (error) {
+        console.error("Error updating user profile:", error);
+      }
+    });
+
+    it("should return an error if profile update fails", async () => {
+      try {
+        const res = await request(server)
+          .put("/api/users/update-profile")
+          .set("Authorization", "Bearer <token>")
+          .send({
+            username: "",
+            email: "newemail@example.com",
+          });
+
+        expect(res.status).toBe(500);
+        expect(res.body.error).toBe("Internal Server Error");
+      } catch (error) {
+        console.error("Error handling profile update failure:", error);
+      }
+    });
+  });
+});

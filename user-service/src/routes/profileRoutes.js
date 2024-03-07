@@ -1,10 +1,14 @@
 const express=require('express');
 const router=express.Router();
-const profileController=require('../controllers/profileController');
+const {getProfile,editProfile}=require('../controllers/profileController');
+const {authenticateUser}=require('../middlewares/authMiddleware')
+const {
+    userSignupValidator,
+    validateAuth,
+    userSigninValidator,
+  } = require("../validators/authValidator");
 
-const authMiddleware=require('../middlewares/authMiddleware')
-
-router.get('/profile',authMiddleware.authenticateUser,profileController.getProfile);
-router.put('/profile',authMiddleware.authenticateUser,profileController.editProfile)
+router.get('/profile',authenticateUser,getProfile);
+router.put('/update-profile',authenticateUser,userSignupValidator,validateAuth,editProfile)
 
 module.exports=router;
