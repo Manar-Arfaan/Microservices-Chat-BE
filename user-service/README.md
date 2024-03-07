@@ -11,6 +11,12 @@ The User Service microservice is built using Node.js and Express.js. It utilizes
 To set up and deploy the User Service microservice, follow these steps:
   git clone <repository_url>
 
+## Environment Variables
+
+This project uses environment variables for configuration. These variables are stored in a `.env` file.
+
+**Note:** The `.env` file should never be pushed to GitHub or any other version control system, as it may contain sensitive information such as API keys, database credentials, etc. The `.env.example` file is included in the repository only for showcasing purposes and should not be used as an actual configuration file.
+
 # API Documentation
 ## User Registration
 ## Base URL
