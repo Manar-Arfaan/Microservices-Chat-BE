@@ -2,7 +2,7 @@
 FROM node:20
 
 # Set the working directory in the container 
-WORKDIR /usr/src/app
+WORKDIR /user-service/src/server
 
 # copy the package.json
 COPY package*.json ./
